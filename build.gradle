@@ -1,9 +1,29 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext{
+        appTargetSdk = 32
+        appMinSdk = 21
+        appVersionCode = 1
+        appVersionName = "0.1"
+        lifecycleVersion = "2.5.1"
+        navigationVersion = "2.5.1"
+        retrofitVersion = "2.9.0"// 暂未使用变量
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
 plugins {
     id 'com.android.application' version '7.2.1' apply false
     id 'com.android.library' version '7.2.1' apply false
 }
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
