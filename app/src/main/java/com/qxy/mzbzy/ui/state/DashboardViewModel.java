@@ -1,4 +1,4 @@
-package com.qxy.mzbzy.ui.dashboard;
+package com.qxy.mzbzy.ui.state;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

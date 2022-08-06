@@ -1,4 +1,4 @@
-package com.qxy.mzbzy.ui.dashboard;
+package com.qxy.mzbzy.ui.page;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.qxy.mzbzy.databinding.FragmentDashboardBinding;
+import com.qxy.mzbzy.ui.state.DashboardViewModel;
 
 public class DashboardFragment extends Fragment {
 
