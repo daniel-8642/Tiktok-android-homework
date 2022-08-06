@@ -4,35 +4,54 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.databinding.FragmentDashboardBinding;
+import com.qxy.mzbzy.ui.App;
 import com.qxy.mzbzy.ui.state.DashboardViewModel;
 
-public class DashboardFragment extends Fragment {
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+public class DashboardFragment extends Fragment {
+    private DashboardViewModel vm;
     private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        vm = App.getApp().getApplicationScopeViewModel(DashboardViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        // 获取本页面databinding对象
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false);
+        // 设定ViewModel监听生命周期
+        binding.setLifecycleOwner(this);
+        // 为对象赋值
+        binding.setVm(vm);
+        binding.setClick(new DashboardFragment.ClickProxy());
+        // 返回根view
+        return binding.getRoot();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        vm = null;
+    }
+
+    public class ClickProxy {
+        public void test() {
+            Toast.makeText(getContext(),"Dash测试文本",Toast.LENGTH_SHORT).show();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = sdf.format(new Date());
+                vm.mText.setValue(date);
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.qxy.mzbzy;
+package com.qxy.mzbzy.ui;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
