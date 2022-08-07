@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.qxy.mzbzy.ui.state.DashboardViewModel" />
+            type="com.qxy.mzbzy.ui.page.DashboardFragment.DashboardViewModel" />
 
         <variable
             name="click"

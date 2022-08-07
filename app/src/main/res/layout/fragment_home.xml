@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.qxy.mzbzy.ui.state.HomeViewModel" />
+            type="com.qxy.mzbzy.ui.page.HomeFragment.HomeViewModel" />
         <variable
             name="click"
             type="com.qxy.mzbzy.ui.page.HomeFragment.ClickProxy" />
