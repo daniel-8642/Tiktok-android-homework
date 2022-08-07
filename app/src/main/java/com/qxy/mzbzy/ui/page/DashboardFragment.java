@@ -1,10 +1,10 @@
 package com.qxy.mzbzy.ui.page;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -13,11 +13,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.api.TestService;
+import com.qxy.mzbzy.data.bean.Test;
+import com.qxy.mzbzy.data.repository.TestRepository;
+import com.qxy.mzbzy.data.response.DataResult;
 import com.qxy.mzbzy.databinding.FragmentDashboardBinding;
 import com.qxy.mzbzy.ui.App;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardFragment extends Fragment {
     private DashboardViewModel vm;
@@ -47,12 +55,17 @@ public class DashboardFragment extends Fragment {
 
     public class ClickProxy {
         public void test() {
-            Toast.makeText(getContext(),"Dash测试文本",Toast.LENGTH_SHORT).show();
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = sdf.format(new Date());
-                vm.mText.setValue(date);
-            }
+            //Toast.makeText(getContext(),"Dash测试文本",Toast.LENGTH_SHORT).show();
+
+            TestRepository repository = TestRepository.getInstance();
+            repository.getTestData(test -> vm.setTestdata(test));
+
+
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                String date = sdf.format(new Date());
+//                vm.mText.setValue(date);
+//            }
         }
     }
     public static class DashboardViewModel extends ViewModel {
@@ -65,6 +78,12 @@ public class DashboardFragment extends Fragment {
         public DashboardViewModel() {
             mText = new MutableLiveData<>();
             mText.setValue("This is dashboard fragment");
+        }
+
+        public void setTestdata(DataResult<Test> result){
+            Test test = result.getResult();
+            mText.setValue(test.test);
+            Log.d("http",test.test);
         }
     }
 }
