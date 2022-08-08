@@ -8,5 +8,6 @@ import retrofit2.http.GET;
 public interface TestService {
     @GET("test")
     Call<Test> testHttp();
+    // 响应： {"test":"成功"}
 
 }

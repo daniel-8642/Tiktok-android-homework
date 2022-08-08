@@ -1,7 +1,6 @@
 package com.qxy.mzbzy.data.response;
-
-import androidx.lifecycle.LiveData;
-
+// 函数式接口
+// 使用示例 repository.getTestData(test -> vm.setTestdata(test));
 public class DataResult<T> {
     private final T mEntity;
 

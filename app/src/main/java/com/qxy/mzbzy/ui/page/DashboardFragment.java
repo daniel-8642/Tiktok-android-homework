@@ -57,9 +57,12 @@ public class DashboardFragment extends Fragment {
         public void test() {
             //Toast.makeText(getContext(),"Dash测试文本",Toast.LENGTH_SHORT).show();
 
+            // 获取仓库对象
             TestRepository repository = TestRepository.getInstance();
+            //发起网络请求，设置回调函数callback
+            // 网络请求成功，获取到test对象，调用callback（vm.setTestdata(test)）处理
+            // vm.setTestdata(test) 将拆解test，将返回值放置到页面
             repository.getTestData(test -> vm.setTestdata(test));
-
 
 //            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -79,7 +82,7 @@ public class DashboardFragment extends Fragment {
             mText = new MutableLiveData<>();
             mText.setValue("This is dashboard fragment");
         }
-
+        // vm.setTestdata(test) 将拆解test，将返回值放置到页面
         public void setTestdata(DataResult<Test> result){
             Test test = result.getResult();
             mText.setValue(test.test);
