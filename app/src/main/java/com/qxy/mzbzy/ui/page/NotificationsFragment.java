@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -13,11 +12,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.bean.Test2;
+import com.qxy.mzbzy.data.repository.Test2Repository;
 import com.qxy.mzbzy.databinding.FragmentNotificationsBinding;
 import com.qxy.mzbzy.ui.App;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class NotificationsFragment extends Fragment {
     private NotificationsViewModel vm;
@@ -46,13 +48,53 @@ public class NotificationsFragment extends Fragment {
     }
 
     public class ClickProxy {
-        public void test() {
-            Toast.makeText(getContext(), "Noti测试文本", Toast.LENGTH_SHORT).show();
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = sdf.format(new Date());
-                vm.mText.setValue(date);
+        public void testA() {
+            Test2Repository repository = Test2Repository.getInstance(getContext());
+            SimpleDateFormat myFormat=new SimpleDateFormat("HH:mm:ss");
+            new Thread(()->{
+                repository.Test2Dao().insert(new Test2(
+                        myFormat.format(new Date(System.currentTimeMillis())),"A"));
+                this.reload();
+            }).start();
+//            Toast.makeText(getContext(), "Noti测试文本", Toast.LENGTH_SHORT).show();
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                String date = sdf.format(new Date());
+//                vm.mText.setValue(date);
+//            }
+        }
+        public void testB() {
+            Test2Repository repository = Test2Repository.getInstance(getContext());
+            SimpleDateFormat myFormat=new SimpleDateFormat("HH:mm:ss");
+            new Thread(()->{
+                repository.Test2Dao().insert(new Test2(
+                        myFormat.format(new Date(System.currentTimeMillis())),"B"));
+                this.reload();
+            }).start();
+        }
+        public void clear() {
+            Test2Repository repository = Test2Repository.getInstance(getContext());
+            new Thread(()->{
+                repository.Test2Dao().clear();
+                this.reload();
+            }).start();
+        }
+
+        public void reloadTest(){
+            new Thread(this::reload).start();
+        }
+
+        public void reload(){
+            Test2Repository repository = Test2Repository.getInstance(getContext());
+            List<Test2> list = repository.Test2Dao().getList();
+            StringBuilder str = new StringBuilder();
+            for (Test2 i:list) {
+                str.append(i.name);
+                str.append(" : ");
+                str.append(i.time);
+                str.append("\n");
             }
+            vm.mText.postValue(str.toString());
         }
     }
     public static class NotificationsViewModel extends ViewModel {

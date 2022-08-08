@@ -2,38 +2,76 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.page.NotificationsFragment">
+
     <data>
+
         <variable
             name="vm"
             type="com.qxy.mzbzy.ui.page.NotificationsFragment.NotificationsViewModel" />
+
         <variable
             name="click"
             type="com.qxy.mzbzy.ui.page.NotificationsFragment.ClickProxy" />
     </data>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
 
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:text="@{vm.mText}"
-            />
-        <!--  @{vm.mText} 表示监听vm.mText -->
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:text="测试按钮"
-            android:onClick="@{()->click.test()}"
-            />
-        <!--  @{()->click.test()  lamda表达式，传递函数给onClick -->
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingBottom="50dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{vm.mText}"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <!--  @{vm.mText} 表示监听vm.mText -->
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:onClick="@{()->click.testA()}"
+                    android:text="添加 A" />
+                <!--  @{()->click.test()  lamda表达式，传递函数给onClick -->
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:onClick="@{()->click.testB()}"
+                    android:text="添加 B" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:onClick="@{()->click.clear()}"
+                    android:text="清空" />
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:onClick="@{()->click.reloadTest()}"
+                    android:text="刷新" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </layout>
