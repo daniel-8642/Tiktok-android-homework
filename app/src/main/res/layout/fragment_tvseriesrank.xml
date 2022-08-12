@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.page.NotificationsFragment">
+    tools:context=".ui.page.VarietyshowrankFragment">
 
     <data>
 
         <variable
             name="vm"
-            type="com.qxy.mzbzy.ui.page.NotificationsFragment.NotificationsViewModel" />
+            type="com.qxy.mzbzy.ui.page.TvseriesrankFragment.TvseriesrankViewModel" />
 
         <variable
             name="click"
-            type="com.qxy.mzbzy.ui.page.NotificationsFragment.ClickProxy" />
+            type="com.qxy.mzbzy.ui.page.TvseriesrankFragment.ClickProxy" />
     </data>
 
     <ScrollView

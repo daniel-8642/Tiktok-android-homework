@@ -13,35 +13,27 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.qxy.mzbzy.R;
-import com.qxy.mzbzy.data.api.TestService;
 import com.qxy.mzbzy.data.bean.Test;
 import com.qxy.mzbzy.data.repository.TestRepository;
 import com.qxy.mzbzy.data.response.DataResult;
-import com.qxy.mzbzy.databinding.FragmentDashboardBinding;
+import com.qxy.mzbzy.databinding.FragmentVarietyshowrankBinding;
 import com.qxy.mzbzy.ui.App;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class DashboardFragment extends Fragment {
-    private DashboardViewModel vm;
-    private FragmentDashboardBinding binding;
+public class VarietyshowrankFragment extends Fragment {
+    private VarietyshowrankViewModel vm;
+    private FragmentVarietyshowrankBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        vm = App.getApp().getApplicationScopeViewModel(DashboardViewModel.class);
+        vm = App.getApp().getApplicationScopeViewModel(VarietyshowrankViewModel.class);
 
         // 获取本页面databinding对象
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_varietyshowrank, container, false);
         // 设定ViewModel监听生命周期
         binding.setLifecycleOwner(this);
         // 为对象赋值
         binding.setVm(vm);
-        binding.setClick(new DashboardFragment.ClickProxy());
+        binding.setClick(new VarietyshowrankFragment.ClickProxy());
         // 返回根view
         return binding.getRoot();
     }
@@ -71,14 +63,14 @@ public class DashboardFragment extends Fragment {
 //            }
         }
     }
-    public static class DashboardViewModel extends ViewModel {
+    public static class VarietyshowrankViewModel extends ViewModel {
 
         //LiveData与Observable均可，LiveData在重新监听时回
         public final MutableLiveData<String> mText;
         // public final ObservableField<String> mText;
 
         // 数据初始化
-        public DashboardViewModel() {
+        public VarietyshowrankViewModel() {
             mText = new MutableLiveData<>();
             mText.setValue("This is dashboard fragment");
         }

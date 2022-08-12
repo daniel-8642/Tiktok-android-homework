@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.qxy.mzbzy.ui.page.HomeFragment"
+        android:name="com.qxy.mzbzy.ui.page.MoviesrankFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_moviesrank" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.qxy.mzbzy.ui.page.DashboardFragment"
+        android:name="com.qxy.mzbzy.ui.page.TvseriesrankFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_varietyshowrank" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.qxy.mzbzy.ui.page.NotificationsFragment"
+        android:name="com.qxy.mzbzy.ui.page.VarietyshowrankFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_tvseriesrank" />
 </navigation>

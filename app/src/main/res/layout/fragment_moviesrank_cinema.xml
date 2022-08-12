@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.page.MoviesrankFragment">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.qxy.mzbzy.ui.page.MoviesrankFragment" />
+
+        <variable
+            name="click"
+            type="com.qxy.mzbzy.ui.page.MoviesrankFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/dydyb" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

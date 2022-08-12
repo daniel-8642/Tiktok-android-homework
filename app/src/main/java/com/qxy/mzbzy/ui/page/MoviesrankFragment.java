@@ -13,22 +13,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 
 import com.qxy.mzbzy.R;
-import com.qxy.mzbzy.databinding.FragmentHomeBinding;
+import com.qxy.mzbzy.databinding.FragmentMoviesrankBinding;
 import com.qxy.mzbzy.ui.App;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class HomeFragment extends Fragment {
-    private HomeViewModel vm;
-    private FragmentHomeBinding binding;
+public class MoviesrankFragment extends Fragment {
+    private MoviesrankViewModel vm;
+    private FragmentMoviesrankBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        vm = App.getApp().getApplicationScopeViewModel(HomeViewModel.class);
+        vm = App.getApp().getApplicationScopeViewModel(MoviesrankViewModel.class);
 
         // 获取本页面databinding对象
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_moviesrank,container,false);
         // 设定ViewModel监听生命周期
         binding.setLifecycleOwner(this);
         // 为对象赋值
@@ -56,13 +56,13 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public static class HomeViewModel extends ViewModel {
+    public static class MoviesrankViewModel extends ViewModel {
         //LiveData与Observable均可，LiveData在重新监听时回
         // public final MutableLiveData<String> mText;
         public final ObservableField<String> mText;
 
         // 数据初始化
-        public HomeViewModel() {
+        public MoviesrankViewModel() {
             mText = new ObservableField<>();
             mText.set("This is home fragment");
         }

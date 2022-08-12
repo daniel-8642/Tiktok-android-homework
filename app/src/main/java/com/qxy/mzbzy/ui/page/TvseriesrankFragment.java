@@ -14,28 +14,28 @@ import androidx.lifecycle.ViewModel;
 import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.data.bean.Test2;
 import com.qxy.mzbzy.data.repository.Test2Repository;
-import com.qxy.mzbzy.databinding.FragmentNotificationsBinding;
+import com.qxy.mzbzy.databinding.FragmentTvseriesrankBinding;
 import com.qxy.mzbzy.ui.App;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class NotificationsFragment extends Fragment {
-    private NotificationsViewModel vm;
-    private FragmentNotificationsBinding binding;
+public class TvseriesrankFragment extends Fragment {
+    private TvseriesrankViewModel vm;
+    private FragmentTvseriesrankBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        vm = App.getApp().getApplicationScopeViewModel(NotificationsViewModel.class);
+        vm = App.getApp().getApplicationScopeViewModel(TvseriesrankViewModel.class);
 
         // 获取本页面databinding对象
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tvseriesrank, container, false);
         // 设定ViewModel监听生命周期
         binding.setLifecycleOwner(this);
         // 为对象赋值
         binding.setVm(vm);
-        binding.setClick(new NotificationsFragment.ClickProxy());
+        binding.setClick(new TvseriesrankFragment.ClickProxy());
         // 返回根view
         return binding.getRoot();
     }
@@ -97,14 +97,14 @@ public class NotificationsFragment extends Fragment {
             vm.mText.postValue(str.toString());
         }
     }
-    public static class NotificationsViewModel extends ViewModel {
+    public static class TvseriesrankViewModel extends ViewModel {
 
         //LiveData与Observable均可，LiveData在重新监听时回
         public final MutableLiveData<String> mText;
         // public final ObservableField<String> mText;
 
         // 数据初始化
-        public NotificationsViewModel() {
+        public TvseriesrankViewModel() {
             mText = new MutableLiveData<>();
             mText.setValue("This is notifications fragment");
         }
