@@ -1,14 +1,12 @@
 package com.qxy.mzbzy.ui.page;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
@@ -17,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.databinding.FragmentMoviesrankBinding;
 import com.qxy.mzbzy.ui.App;
 import com.qxy.mzbzy.ui.page.moviesrank.MoviesrankCinemaFragment;
@@ -31,11 +28,11 @@ import java.util.List;
 public class MoviesrankFragment extends Fragment {
     private MoviesrankViewModel vm;
     private FragmentMoviesrankBinding binding;
-    public final List<Fragment> viewPagerList = new ArrayList<>();
 
     @Override
     public void onStart() {
         super.onStart();
+        final List<Fragment> viewPagerList = new ArrayList<>();
         viewPagerList.add(new MoviesrankCinemaFragment());
         viewPagerList.add(new MoviesrankInternetFragment());
         ViewPager2 viewPager2 = binding.moviesrankViewPager;
@@ -57,10 +54,10 @@ public class MoviesrankFragment extends Fragment {
             //todo:更换string
             switch (position) {
                 case 0:
-                    tab.setText("首页");
+                    tab.setText("院线电影");
                     break;
                 case 1:
-                    tab.setText("时间/单位");
+                    tab.setText("网络电影");
                     break;
                 default:
                     break;
