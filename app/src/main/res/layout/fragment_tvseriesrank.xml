@@ -25,6 +25,10 @@
             android:paddingBottom="50dp"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/dyjjb"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -36,42 +40,50 @@
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <!--  @{vm.mText} 表示监听vm.mText -->
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:onClick="@{()->click.testA()}"
-                    android:text="添加 A" />
-                <!--  @{()->click.test()  lamda表达式，传递函数给onClick -->
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:onClick="@{()->click.testB()}"
-                    android:text="添加 B" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:onClick="@{()->click.clear()}"
-                    android:text="清空" />
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:onClick="@{()->click.reloadTest()}"
-                    android:text="刷新" />
-            </LinearLayout>
+
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                &lt;!&ndash;  @{vm.mText} 表示监听vm.mText &ndash;&gt;-->
+<!--                <Button-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:onClick="@{()->click.testA()}"-->
+<!--                    android:text="添加 A" />-->
+<!--                &lt;!&ndash;  @{()->click.test()  lamda表达式，传递函数给onClick &ndash;&gt;-->
+<!--                <Button-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:onClick="@{()->click.testB()}"-->
+<!--                    android:text="添加 B" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <Button-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:onClick="@{()->click.clear()}"-->
+<!--                    android:text="清空" />-->
+<!--                <Button-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:onClick="@{()->click.reloadTest()}"-->
+<!--                    android:text="刷新" />-->
+<!--            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 </layout>
