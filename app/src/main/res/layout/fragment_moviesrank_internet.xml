@@ -18,16 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <ImageView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/dydyb" />
-        </LinearLayout>
+                android:layout_height="wrap_content" />
+        </ScrollView>
     </ScrollView>
 </layout>

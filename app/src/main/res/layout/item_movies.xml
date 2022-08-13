@@ -6,6 +6,7 @@
     android:padding="5dp">
 
     <ImageView
+        android:id="@+id/image"
         android:layout_width="80dp"
         android:layout_height="100dp"
         android:background="@drawable/rsds"
@@ -19,6 +20,7 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -27,24 +29,28 @@
             android:text="人生大事" />
 
         <TextView
+            android:id="@+id/star"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="豆瓣评分⭐7.4" />
 
         <TextView
+            android:id="@+id/type"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="剧情 / 治愈" />
 
         <TextView
+            android:id="@+id/uptime"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="2022 上映" />
 
         <TextView
+            android:id="@+id/hot"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

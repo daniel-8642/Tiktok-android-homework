@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.databinding.FragmentMoviesrankCinemaBinding;
@@ -34,6 +38,14 @@ public class MoviesrankCinemaFragment extends Fragment {
         // 为对象赋值
         binding.setVm(vm);
         binding.setClick(new MoviesrankCinemaFragment.ClickProxy());
+
+        binding.recycler.setAdapter(new mAdapter());
+        // 创建一个线性布局管理器
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        // 默认是Vertical，可以不写
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.recycler.setLayoutManager(mLayoutManager);
+
         // 返回根view
         return binding.getRoot();
     }
@@ -44,9 +56,6 @@ public class MoviesrankCinemaFragment extends Fragment {
         binding = null;
         vm = null;
     }
-
-
-
     public class ClickProxy {
         public void test() {
             Toast.makeText(getContext(),"测试文本",Toast.LENGTH_SHORT).show();
@@ -70,4 +79,38 @@ public class MoviesrankCinemaFragment extends Fragment {
         }
 
     }
+    public class mAdapter extends RecyclerView.Adapter<MyHolder>  {
+
+        @NonNull
+        @Override
+        public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movies, parent, false);
+            return new MyHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+            holder.title.setText(""+position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return 10;
+        }
+    }
+    public static class MyHolder extends RecyclerView.ViewHolder {
+        TextView title, star,type, hot;
+        ImageView imege;
+
+        public MyHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.title);
+            imege = itemView.findViewById(R.id.image);
+            star = itemView.findViewById(R.id.star);
+            type = itemView.findViewById(R.id.type);
+            hot = itemView.findViewById(R.id.hot);
+        }
+    }
+
+
 }
