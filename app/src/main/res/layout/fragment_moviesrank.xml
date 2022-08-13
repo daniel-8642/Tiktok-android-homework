@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.page.MoviesrankFragment">
 
     <data>
@@ -28,23 +29,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/dydyb" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{vm.mText}"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-            <!--  @{vm.mText} 表示监听vm.mText -->
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:onClick="@{()->click.test()}"
-                android:text="测试按钮" />
-            <!--  @{()->click.test()  lamda表达式，传递函数给onClick -->
+                android:orientation="horizontal">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/moviesrank_tabLayOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:tabMode="scrollable">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="本元件只作为效果预览" />
+
+                </com.google.android.material.tabs.TabLayout>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/moviesrank_viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </layout>

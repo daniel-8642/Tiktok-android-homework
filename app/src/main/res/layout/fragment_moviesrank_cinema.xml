@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.page.MoviesrankFragment">
+    tools:context=".ui.page.moviesrank.MoviesrankCinemaFragment">
 
     <data>
 
         <variable
             name="vm"
-            type="com.qxy.mzbzy.ui.page.MoviesrankFragment" />
+            type="com.qxy.mzbzy.ui.page.moviesrank.MoviesrankCinemaFragment.MoviesrankCinemaViewModel" />
 
         <variable
             name="click"
-            type="com.qxy.mzbzy.ui.page.MoviesrankFragment" />
+            type="com.qxy.mzbzy.ui.page.moviesrank.MoviesrankCinemaFragment.ClickProxy" />
     </data>
 
     <ScrollView
