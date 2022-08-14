@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.data.bean.Rank;
+import com.qxy.mzbzy.data.repository.RankRepository;
 import com.qxy.mzbzy.databinding.FragmentMoviesrankCinemaBinding;
 import com.qxy.mzbzy.databinding.ItemMoviesBinding;
 import com.qxy.mzbzy.ui.App;
@@ -28,6 +29,8 @@ import com.qxy.mzbzy.ui.App;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Retrofit;
 
 public class MoviesrankCinemaFragment extends Fragment {
     private MoviesrankCinemaViewModel vm;
@@ -90,56 +93,65 @@ public class MoviesrankCinemaFragment extends Fragment {
             return list;
         }
         // 直接使用测试数据生成列表
+//        {
+//            Gson gson = new Gson();
+//
+//            Rank rank = gson.fromJson("{\n" +
+//                "  \"data\": {\n" +
+//                "    \"active_time\": \"2020-03-31 12:00:00\",\n" +
+//                "    \"description\": \"\",\n" +
+//                "    \"error_code\": \"0\",\n" +
+//                "    \"list\": [\n" +
+//                "      {\n" +
+//                "        \"actors\": [\n" +
+//                "          \"[徐峥 袁泉 沈腾 吴云芳 陈奇 黄梅莹 欧丽娅 贾冰 郭京飞]\"\n" +
+//                "        ],\n" +
+//                "        \"areas\": [\n" +
+//                "          \"[中国]\"\n" +
+//                "        ],\n" +
+//                "        \"directors\": [\n" +
+//                "          \"[徐峥]\"\n" +
+//                "        ],\n" +
+//                "        \"discussion_hot\": \"789200\",\n" +
+//                "        \"hot\": \"1.361e+06\",\n" +
+//                "        \"id\": \"6399487713065566465\",\n" +
+//                "        \"influence_hot\": \"789200\",\n" +
+//                "        \"maoyan_id\": \"1250696\",\n" +
+//                "        \"name\": \"囧妈\",\n" +
+//                "        \"name_en\": \"Lost in Russia\",\n" +
+//                "        \"poster\": \"https://p3-dy.bytecdn.cn/obj/compass/9ac412ae054b57f69c0967a8eb5e25c9\",\n" +
+//                "        \"release_date\": \"2020-01-25\",\n" +
+//                "        \"search_hot\": \"684900\",\n" +
+//                "        \"tags\": [\n" +
+//                "          \"[喜剧]\"\n" +
+//                "        ],\n" +
+//                "        \"topic_hot\": \"684900\",\n" +
+//                "        \"type\": \"1\"\n" +
+//                "      }\n" +
+//                "    ]\n" +
+//                "  },\n" +
+//                "  \"extra\": {\n" +
+//                "    \"description\": \"\",\n" +
+//                "    \"error_code\": \"0\",\n" +
+//                "    \"logid\": \"202008121419360101980821035705926A\",\n" +
+//                "    \"now\": \"1597213176393\",\n" +
+//                "    \"sub_description\": \"\",\n" +
+//                "    \"sub_error_code\": \"0\"\n" +
+//                "  }\n" +
+//                "}", Rank.class);
+//            list=rank.getData().getList();
+//            Log.d("json解析", "实例初始值设定项: "+list);
+//        }
+        // 请求云端上mock接口
         {
-            Gson gson = new Gson();
-
-            Rank rank = gson.fromJson("{\n" +
-                "  \"data\": {\n" +
-                "    \"active_time\": \"2020-03-31 12:00:00\",\n" +
-                "    \"description\": \"\",\n" +
-                "    \"error_code\": \"0\",\n" +
-                "    \"list\": [\n" +
-                "      {\n" +
-                "        \"actors\": [\n" +
-                "          \"[徐峥 袁泉 沈腾 吴云芳 陈奇 黄梅莹 欧丽娅 贾冰 郭京飞]\"\n" +
-                "        ],\n" +
-                "        \"areas\": [\n" +
-                "          \"[中国]\"\n" +
-                "        ],\n" +
-                "        \"directors\": [\n" +
-                "          \"[徐峥]\"\n" +
-                "        ],\n" +
-                "        \"discussion_hot\": \"789200\",\n" +
-                "        \"hot\": \"1.361e+06\",\n" +
-                "        \"id\": \"6399487713065566465\",\n" +
-                "        \"influence_hot\": \"789200\",\n" +
-                "        \"maoyan_id\": \"1250696\",\n" +
-                "        \"name\": \"囧妈\",\n" +
-                "        \"name_en\": \"Lost in Russia\",\n" +
-                "        \"poster\": \"https://p3-dy.bytecdn.cn/obj/compass/9ac412ae054b57f69c0967a8eb5e25c9\",\n" +
-                "        \"release_date\": \"2020-01-25\",\n" +
-                "        \"search_hot\": \"684900\",\n" +
-                "        \"tags\": [\n" +
-                "          \"[喜剧]\"\n" +
-                "        ],\n" +
-                "        \"topic_hot\": \"684900\",\n" +
-                "        \"type\": \"1\"\n" +
-                "      }\n" +
-                "    ]\n" +
-                "  },\n" +
-                "  \"extra\": {\n" +
-                "    \"description\": \"\",\n" +
-                "    \"error_code\": \"0\",\n" +
-                "    \"logid\": \"202008121419360101980821035705926A\",\n" +
-                "    \"now\": \"1597213176393\",\n" +
-                "    \"sub_description\": \"\",\n" +
-                "    \"sub_error_code\": \"0\"\n" +
-                "  }\n" +
-                "}", Rank.class);
-            list=rank.getData().getList();
-            Log.d("json解析", "实例初始值设定项: "+list);
+            RankRepository repository = RankRepository.getInstance();
+            repository.getTestData(data->{
+                List<Rank.Data.MList> list1 = data.getResult().getData().getList();
+                list=list1;
+                Log.d("TAG", "数据返回");
+                this.notifyDataSetChanged();
+            });
         }
-
 
         @NonNull
         @Override
