@@ -3,8 +3,8 @@ package com.qxy.mzbzy.data.repository;
 import android.util.Log;
 
 import com.qxy.mzbzy.data.api.APIs;
-import com.qxy.mzbzy.data.api.TestService;
-import com.qxy.mzbzy.data.bean.Test;
+import com.qxy.mzbzy.data.api.RankService;
+import com.qxy.mzbzy.data.bean.Rank;
 import com.qxy.mzbzy.data.response.DataResult;
 
 import java.util.concurrent.TimeUnit;
@@ -17,17 +17,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-// 在数据仓库中托管retrofit对象用于连接云端
-public class TestRepository {
+public class RankRepository {
 
     // 静态单例
-    private static final TestRepository S_REQUEST_MANAGER = new TestRepository();
+    private static final RankRepository S_REQUEST_MANAGER = new RankRepository();
 
     // 禁用构造函数
-    private TestRepository() {
+    private RankRepository() {
     }
     //获取单例对象的方法
-    public static TestRepository getInstance() {
+    public static RankRepository getInstance() {
         return S_REQUEST_MANAGER;
     }
     // 仓库托管的Retrofit对象
@@ -48,23 +47,23 @@ public class TestRepository {
                 .build();
         // 构建Retrofit对象，单例模式，唯一
         retrofit = new Retrofit.Builder()
-                .baseUrl(APIs.apifoxTest_BASE_URL)//设定域名
+                .baseUrl(APIs.cloudTest_BASE_URL)//设定域名
                 .client(client)//输入OkHttpClient
                 .addConverterFactory(GsonConverterFactory.create())//设置Gson，翻译json为对象
                 .build();
     }
 
     // 获取数据的函数，输入参数为函数式接口
-    public void getTestData(DataResult.Result<Test> result) {
+    public void getTestData(DataResult.Result<Rank> result) {
         // 使用retrofit，从interface获取
-        TestService service = retrofit.create(TestService.class);
+        RankService service = retrofit.create(RankService.class);
         //获取请求对象
-        Call<Test> call = service.testHttp();
+        Call<Rank> call = service.getRank();
         Log.d("http", "test");//日志
-        call.enqueue(new Callback<Test>() {  // 发送网络请求，enqueue为异步请求
+        call.enqueue(new Callback<Rank>() {  // 发送网络请求，enqueue为异步请求
             //请求成功时回调
             @Override
-            public void onResponse(Call<Test> call, Response<Test> response) {
+            public void onResponse(Call<Rank> call, Response<Rank> response) {
 //                    showTV.setText(response.body().show());
                 //请求返回结果从Response对象获取，返回的正文从 body() 获取
                 result.onResult(new DataResult<>(response.body()));
@@ -72,8 +71,9 @@ public class TestRepository {
 
             //请求失败时回调
             @Override
-            public void onFailure(Call<Test> call, Throwable t) {
-                Log.e("testRepository", "连接服务器失败！ ",t);
+            public void onFailure(Call<Rank> call, Throwable t) {
+                Log.e("testRepository", "连接服务器失败！ ");
+                Log.w("http err", "onFailure: ", t);
 //                    Toast.makeText(MainActivity.this, "连接服务器失败！", Toast.LENGTH_SHORT).show();
             }
         });

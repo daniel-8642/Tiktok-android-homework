@@ -13,8 +13,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.qxy.mzbzy.R;
-import com.qxy.mzbzy.data.bean.Test;
-import com.qxy.mzbzy.data.repository.TestRepository;
+import com.qxy.mzbzy.data.bean.Rank;
+import com.qxy.mzbzy.data.repository.RankRepository;
 import com.qxy.mzbzy.data.response.DataResult;
 import com.qxy.mzbzy.databinding.FragmentVarietyshowrankBinding;
 import com.qxy.mzbzy.ui.App;
@@ -50,11 +50,11 @@ public class VarietyshowrankFragment extends Fragment {
             //Toast.makeText(getContext(),"Dash测试文本",Toast.LENGTH_SHORT).show();
 
             // 获取仓库对象
-            TestRepository repository = TestRepository.getInstance();
+            RankRepository repository = RankRepository.getInstance();
             //发起网络请求，设置回调函数callback
             // 网络请求成功，获取到test对象，调用callback（vm.setTestdata(test)）处理
             // vm.setTestdata(test) 将拆解test，将返回值放置到页面
-            repository.getTestData(test -> vm.setTestdata(test));
+            repository.getTestData(data -> vm.getStringFromRank(data));
 
 //            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -66,19 +66,23 @@ public class VarietyshowrankFragment extends Fragment {
     public static class VarietyshowrankViewModel extends ViewModel {
 
         //LiveData与Observable均可，LiveData在重新监听时回
-        public final MutableLiveData<String> mText;
+        public final MutableLiveData<String> mText ;
         // public final ObservableField<String> mText;
 
-        // 数据初始化
-        public VarietyshowrankViewModel() {
+        {
             mText = new MutableLiveData<>();
             mText.setValue("This is dashboard fragment");
         }
-        // vm.setTestdata(test) 将拆解test，将返回值放置到页面
-        public void setTestdata(DataResult<Test> result){
-            Test test = result.getResult();
-            mText.setValue(test.test);
-            Log.d("http",test.test);
+        // 数据初始化
+//        public VarietyshowrankViewModel() {
+//            mText = new MutableLiveData<>();
+//            mText.setValue("This is dashboard fragment");
+//        }
+        public void getStringFromRank(DataResult<Rank> rank){
+
+            Rank.Data data = rank.getResult().getData();
+            // Log.d("test", "getStringFromRank:"+data.toString());
+            mText.postValue(data.getList().get(0).getName());
         }
     }
 }

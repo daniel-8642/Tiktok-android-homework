@@ -12,16 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.bean.Rank;
 import com.qxy.mzbzy.databinding.FragmentMoviesrankInternetBinding;
 import com.qxy.mzbzy.ui.App;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class MoviesrankInternetFragment extends Fragment {
@@ -74,7 +78,7 @@ private FragmentMoviesrankInternetBinding binding;
         //LiveData与Observable均可
         // public final MutableLiveData<String> mText;
         public final ObservableField<String> mText;
-
+        public final ObservableField<List<Rank.Data.MList>> list = new ObservableField<>(new ArrayList<>());
         // 数据初始化
         public MoviesrankInternetViewModel() {
             mText = new ObservableField<>();
@@ -93,12 +97,12 @@ private FragmentMoviesrankInternetBinding binding;
 
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-            holder.title.setText(""+position);
+            holder.title.setText(""+(position+1));
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return 20;
         }
     }
     public static class MyHolder extends RecyclerView.ViewHolder {

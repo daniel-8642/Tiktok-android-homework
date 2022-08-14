@@ -1,72 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dp">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:background="@drawable/rsds"
-        />
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.qxy.mzbzy.data.bean.Rank.Data.MList" />
+    </data>
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="人生大事" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rsds" />
 
-        <TextView
-            android:id="@+id/star"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="豆瓣评分⭐7.4" />
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="剧情 / 治愈" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="@{item.getName()}"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/uptime"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="2022 上映" />
+            <TextView
+                android:id="@+id/star"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{item.getTagsOut()}" />
 
-        <TextView
-            android:id="@+id/hot"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="🔥 1283.5 万" />
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{item.getUpYearOut()}" />
 
+            <TextView
+                android:id="@+id/uptime"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{item.getDirectorsOut()}" />
+
+            <TextView
+                android:id="@+id/hot"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{item.getHotOut()}" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="购票" />
     </LinearLayout>
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    />
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text="购票"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
-</LinearLayout>
+</layout>
