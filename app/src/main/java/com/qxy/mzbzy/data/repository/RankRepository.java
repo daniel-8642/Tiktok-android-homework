@@ -54,11 +54,83 @@ public class RankRepository {
     }
 
     // 获取数据的函数，输入参数为函数式接口
-    public void getTestData(DataResult.Result<Rank> result) {
+    public void getRankMovieI(DataResult.Result<Rank> result) {
         // 使用retrofit，从interface获取
         RankService service = retrofit.create(RankService.class);
         //获取请求对象
-        Call<Rank> call = service.getRank();
+        Call<Rank> call = service.getRankMovieI();
+        Log.d("http", "test");//日志
+        call.enqueue(new Callback<Rank>() {  // 发送网络请求，enqueue为异步请求
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<Rank> call, Response<Rank> response) {
+//                    showTV.setText(response.body().show());
+                //请求返回结果从Response对象获取，返回的正文从 body() 获取
+                result.onResult(new DataResult<>(response.body()));
+            }
+
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<Rank> call, Throwable t) {
+                Log.e("testRepository", "连接服务器失败！ ");
+                Log.w("http err", "onFailure: ", t);
+//                    Toast.makeText(MainActivity.this, "连接服务器失败！", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void getRankMovieC(DataResult.Result<Rank> result) {
+        // 使用retrofit，从interface获取
+        RankService service = retrofit.create(RankService.class);
+        //获取请求对象
+        Call<Rank> call = service.getRankMovieC();
+        Log.d("http", "test");//日志
+        call.enqueue(new Callback<Rank>() {  // 发送网络请求，enqueue为异步请求
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<Rank> call, Response<Rank> response) {
+//                    showTV.setText(response.body().show());
+                //请求返回结果从Response对象获取，返回的正文从 body() 获取
+                result.onResult(new DataResult<>(response.body()));
+            }
+
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<Rank> call, Throwable t) {
+                Log.e("testRepository", "连接服务器失败！ ");
+                Log.w("http err", "onFailure: ", t);
+//                    Toast.makeText(MainActivity.this, "连接服务器失败！", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void getRankTV(DataResult.Result<Rank> result) {
+        // 使用retrofit，从interface获取
+        RankService service = retrofit.create(RankService.class);
+        //获取请求对象
+        Call<Rank> call = service.getRankTV();
+        Log.d("http", "test");//日志
+        call.enqueue(new Callback<Rank>() {  // 发送网络请求，enqueue为异步请求
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<Rank> call, Response<Rank> response) {
+//                    showTV.setText(response.body().show());
+                //请求返回结果从Response对象获取，返回的正文从 body() 获取
+                result.onResult(new DataResult<>(response.body()));
+            }
+
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<Rank> call, Throwable t) {
+                Log.e("testRepository", "连接服务器失败！ ");
+                Log.w("http err", "onFailure: ", t);
+//                    Toast.makeText(MainActivity.this, "连接服务器失败！", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void getRankShow(DataResult.Result<Rank> result) {
+        // 使用retrofit，从interface获取
+        RankService service = retrofit.create(RankService.class);
+        //获取请求对象
+        Call<Rank> call = service.getRankShow();
         Log.d("http", "test");//日志
         call.enqueue(new Callback<Rank>() {  // 发送网络请求，enqueue为异步请求
             //请求成功时回调

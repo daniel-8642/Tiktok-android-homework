@@ -121,7 +121,7 @@ public class TvseriesrankFragment extends Fragment {
         // 请求云端上mock接口
         {
             RankRepository repository = RankRepository.getInstance();
-            repository.getTestData(data->{
+            repository.getRankTV(data->{
                 List<Rank.Data.MList> list1 = data.getResult().getData().getList();
                 list=list1;
                 Log.d("TAG", "数据返回");

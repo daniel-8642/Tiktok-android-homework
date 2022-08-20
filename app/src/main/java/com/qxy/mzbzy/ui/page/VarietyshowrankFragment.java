@@ -59,7 +59,7 @@ public class VarietyshowrankFragment extends Fragment {
             //发起网络请求，设置回调函数callback
             // 网络请求成功，获取到test对象，调用callback（vm.setTestdata(test)）处理
             // vm.setTestdata(test) 将拆解test，将返回值放置到页面
-            repository.getTestData(data -> vm.getStringFromRank(data));
+            repository.getRankShow(data -> vm.getStringFromRank(data));
 
 //            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -150,9 +150,8 @@ public class VarietyshowrankFragment extends Fragment {
         // 请求云端上mock接口
         {
             RankRepository repository = RankRepository.getInstance();
-            repository.getTestData(data->{
-                List<Rank.Data.MList> list1 = data.getResult().getData().getList();
-                list=list1;
+            repository.getRankShow(data->{
+                list= data.getResult().getData().getList();
                 Log.d("TAG", "数据返回");
                 this.notifyDataSetChanged();
             });

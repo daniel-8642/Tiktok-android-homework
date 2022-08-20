@@ -10,6 +10,13 @@ public interface RankService {
     @GET("test")
     Call<Test> testHttp();
     // 响应： {"test":"成功"}
-    @GET("discovery/ent/rank/item")
-    Call<Rank> getRank();
+    @GET("discovery/ent/rank/item/moviesrankC")
+    Call<Rank> getRankMovieC();
+
+    @GET("discovery/ent/rank/item/moviesrankI")
+    Call<Rank> getRankMovieI();
+    @GET("discovery/ent/rank/item/TV")
+    Call<Rank> getRankTV();
+    @GET("discovery/ent/rank/item/Show")
+    Call<Rank> getRankShow();
 }
