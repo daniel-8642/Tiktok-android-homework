@@ -5,20 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableField;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.data.bean.Rank;
 import com.qxy.mzbzy.data.repository.RankRepository;
@@ -29,8 +24,6 @@ import com.qxy.mzbzy.ui.App;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import retrofit2.Retrofit;
 
 public class MoviesrankCinemaFragment extends Fragment {
     private MoviesrankCinemaViewModel vm;
@@ -74,7 +67,7 @@ public class MoviesrankCinemaFragment extends Fragment {
     }
 
     public static class MoviesrankCinemaViewModel extends ViewModel {
-        //LiveData与Observable均可，LiveData在重新监听时回
+        //LiveData与Observable均可
         // public final MutableLiveData<String> mText;
         public final ObservableField<String> mText;
 
@@ -152,20 +145,17 @@ public class MoviesrankCinemaFragment extends Fragment {
                 this.notifyDataSetChanged();
             });
         }
-
         @NonNull
         @Override
         public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             ItemMoviesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_movies, parent, false);
             //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movies, parent, false);
-            Log.d("TAG", "onCreateViewHolder: ");
+            // Log.d("TAG", "onCreateViewHolder: ");
             return new MyHolder(binding);
         }
 
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-            //holder.title.setText(""+position);
-            Log.d("TAG", "onBindViewHolder: ");
             if (list!=null&&list.size()>position) {
                 Rank.Data.MList item = list.get(position);
                 holder.itemBinding.setItem(item);

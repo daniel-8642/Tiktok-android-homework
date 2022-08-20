@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_movies"
-            />
+            tools:listitem="@layout/item_movies" />
     </ScrollView>
 </layout>
