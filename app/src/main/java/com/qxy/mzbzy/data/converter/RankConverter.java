@@ -17,7 +17,7 @@ public class RankConverter {
     }
 
     @TypeConverter
-    public List<Rank> stringToObject(String json) {
+    public Rank stringToObject(String json) {
         Type listType = new TypeToken<Rank>(){}.getType();
         Gson gson = new Gson();
         return gson.fromJson(json, listType);

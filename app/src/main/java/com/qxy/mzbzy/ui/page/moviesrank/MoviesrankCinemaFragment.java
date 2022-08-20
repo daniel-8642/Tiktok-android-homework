@@ -15,7 +15,10 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.api.CacheDao;
+import com.qxy.mzbzy.data.bean.Cache;
 import com.qxy.mzbzy.data.bean.Rank;
+import com.qxy.mzbzy.data.repository.CacheRepository;
 import com.qxy.mzbzy.data.repository.RankRepository;
 import com.qxy.mzbzy.databinding.FragmentMoviesrankCinemaBinding;
 import com.qxy.mzbzy.databinding.ItemMoviesBinding;
