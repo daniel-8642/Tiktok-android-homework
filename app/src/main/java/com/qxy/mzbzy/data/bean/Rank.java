@@ -1,7 +1,11 @@
 package com.qxy.mzbzy.data.bean;
 
-import java.util.List;
+import androidx.room.TypeConverters;
 
+import com.qxy.mzbzy.data.converter.RankConverter;
+
+import java.util.List;
+@TypeConverters(RankConverter.class)
 public class Rank {
     private Data data;
     public void setData(Data data) {
