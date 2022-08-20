@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.page.TvseriesrankFragment">
 
     <data>
@@ -12,6 +13,9 @@
         <variable
             name="click"
             type="com.qxy.mzbzy.ui.page.VarietyshowrankFragment.ClickProxy" />
+        <variable
+            name="adapter"
+            type="com.qxy.mzbzy.ui.page.VarietyshowrankFragment.MAdapter" />
     </data>
 
 
@@ -30,22 +34,13 @@
                 android:layout_height="200dp"
                 android:background="@drawable/dyzyb"/>
 
-            <TextView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{vm.mText}"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-            <!--  @{vm.mText} 表示监听vm.mText -->
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:onClick="@{()->click.test()}"
-                android:text="测试按钮" />
-            <!--  @{()->click.test()  lamda表达式，传递函数给onClick -->
+                android:adapter="@{adapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_movies" />
         </LinearLayout>
 
 
