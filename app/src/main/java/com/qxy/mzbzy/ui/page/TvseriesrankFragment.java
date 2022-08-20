@@ -14,7 +14,10 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.api.CacheDao;
+import com.qxy.mzbzy.data.bean.Cache;
 import com.qxy.mzbzy.data.bean.Rank;
+import com.qxy.mzbzy.data.repository.CacheRepository;
 import com.qxy.mzbzy.data.repository.RankRepository;
 import com.qxy.mzbzy.databinding.FragmentTvseriesrankBinding;
 import com.qxy.mzbzy.databinding.ItemMoviesBinding;
@@ -120,12 +123,18 @@ public class TvseriesrankFragment extends Fragment {
 //        }
         // 请求云端上mock接口
         {
+            CacheDao cacheDao = CacheRepository.getInstance(getContext()).CacheDao();
+            new Thread(() -> {
+                Cache cache = cacheDao.getByName("TV");
+                if (cache != null) {
+                    list = cache.rank.getData().getList();
+                }
+            }).start();
             RankRepository repository = RankRepository.getInstance();
-            repository.getRankTV(data->{
-                List<Rank.Data.MList> list1 = data.getResult().getData().getList();
-                list=list1;
-                Log.d("TAG", "数据返回");
-                this.notifyDataSetChanged();
+            repository.getRankTV(data -> {
+                Rank result = data.getResult();
+                new Thread(() -> cacheDao.insert(new Cache("TV", result))).start();
+                list = result.getData().getList();
             });
         }
         @NonNull

@@ -14,7 +14,10 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.api.CacheDao;
+import com.qxy.mzbzy.data.bean.Cache;
 import com.qxy.mzbzy.data.bean.Rank;
+import com.qxy.mzbzy.data.repository.CacheRepository;
 import com.qxy.mzbzy.data.repository.RankRepository;
 import com.qxy.mzbzy.data.response.DataResult;
 import com.qxy.mzbzy.databinding.FragmentVarietyshowrankBinding;
@@ -149,11 +152,18 @@ public class VarietyshowrankFragment extends Fragment {
 //        }
         // 请求云端上mock接口
         {
+            CacheDao cacheDao = CacheRepository.getInstance(getContext()).CacheDao();
+            new Thread(() -> {
+                Cache cache = cacheDao.getByName("Show");
+                if (cache != null) {
+                    list = cache.rank.getData().getList();
+                }
+            }).start();
             RankRepository repository = RankRepository.getInstance();
-            repository.getRankShow(data->{
-                list= data.getResult().getData().getList();
-                Log.d("TAG", "数据返回");
-                this.notifyDataSetChanged();
+            repository.getRankShow(data -> {
+                Rank result = data.getResult();
+                new Thread(() -> cacheDao.insert(new Cache("Show", result))).start();
+                list = result.getData().getList();
             });
         }
         @NonNull

@@ -88,6 +88,7 @@ public class MoviesrankCinemaFragment extends Fragment {
         public List<Rank.Data.MList> getList() {
             return list;
         }
+
         // 直接使用测试数据生成列表
 //        {
 //            Gson gson = new Gson();
@@ -140,14 +141,21 @@ public class MoviesrankCinemaFragment extends Fragment {
 //        }
         // 请求云端上mock接口
         {
+            CacheDao cacheDao = CacheRepository.getInstance(getContext()).CacheDao();
+            new Thread(() -> {
+                Cache cache = cacheDao.getByName("moviesrankC");
+                if (cache != null) {
+                    list = cache.rank.getData().getList();
+                }
+            }).start();
             RankRepository repository = RankRepository.getInstance();
-            repository.getRankMovieC(data->{
-                List<Rank.Data.MList> list1 = data.getResult().getData().getList();
-                list=list1;
-                Log.d("TAG", "数据返回");
-                this.notifyDataSetChanged();
+            repository.getRankMovieC(data -> {
+                Rank result = data.getResult();
+                new Thread(() -> cacheDao.insert(new Cache("moviesrankC", result))).start();
+                list = result.getData().getList();
             });
         }
+
         @NonNull
         @Override
         public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -159,7 +167,7 @@ public class MoviesrankCinemaFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-            if (list!=null&&list.size()>position) {
+            if (list != null && list.size() > position) {
                 Rank.Data.MList item = list.get(position);
                 holder.itemBinding.setItem(item);
             }

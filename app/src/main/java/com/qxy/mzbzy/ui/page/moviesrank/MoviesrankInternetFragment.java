@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
+import com.qxy.mzbzy.data.api.CacheDao;
+import com.qxy.mzbzy.data.bean.Cache;
 import com.qxy.mzbzy.data.bean.Rank;
+import com.qxy.mzbzy.data.repository.CacheRepository;
 import com.qxy.mzbzy.data.repository.RankRepository;
 import com.qxy.mzbzy.databinding.FragmentMoviesrankInternetBinding;
 import com.qxy.mzbzy.databinding.ItemMoviesBinding;
@@ -145,12 +148,18 @@ private FragmentMoviesrankInternetBinding binding;
 //        }
         // 请求云端上mock接口
         {
+            CacheDao cacheDao = CacheRepository.getInstance(getContext()).CacheDao();
+            new Thread(() -> {
+                Cache cache = cacheDao.getByName("moviesrankI");
+                if (cache != null) {
+                    list = cache.rank.getData().getList();
+                }
+            }).start();
             RankRepository repository = RankRepository.getInstance();
-            repository.getRankMovieI(data->{
-                List<Rank.Data.MList> list1 = data.getResult().getData().getList();
-                list=list1;
-                Log.d("TAG", "数据返回");
-                this.notifyDataSetChanged();
+            repository.getRankMovieC(data -> {
+                Rank result = data.getResult();
+                new Thread(() -> cacheDao.insert(new Cache("moviesrankI", result))).start();
+                list = result.getData().getList();
             });
         }
         @NonNull
