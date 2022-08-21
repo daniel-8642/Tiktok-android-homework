@@ -10,7 +10,6 @@ import com.qxy.mzbzy.data.response.DataResult;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,14 +35,14 @@ public class RankRepository {
     // 静态代码段，在程序初始化（引入仓库时运行）
     {
         //设置打印日志
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         // 构建okhttpclient，以自定义连接参数
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(8, TimeUnit.SECONDS)
                 .readTimeout(8, TimeUnit.SECONDS)
                 .writeTimeout(8, TimeUnit.SECONDS)
-                .addInterceptor(logging)
+//                .addInterceptor(logging)
                 .build();
         // 构建Retrofit对象，单例模式，唯一
         retrofit = new Retrofit.Builder()

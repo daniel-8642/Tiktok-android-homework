@@ -1,7 +1,6 @@
 package com.qxy.mzbzy.ui.page.moviesrank;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,6 +169,7 @@ public class MoviesrankCinemaFragment extends Fragment {
             if (list != null && list.size() > position) {
                 Rank.Data.MList item = list.get(position);
                 holder.itemBinding.setItem(item);
+                // Glide.with(requireContext()).load(item.getPoster()).into(holder.itemBinding.image);
             }
         }
 
