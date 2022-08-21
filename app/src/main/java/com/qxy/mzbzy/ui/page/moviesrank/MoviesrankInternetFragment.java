@@ -1,7 +1,6 @@
 package com.qxy.mzbzy.ui.page.moviesrank;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableField;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qxy.mzbzy.R;
@@ -26,7 +24,6 @@ import com.qxy.mzbzy.databinding.ItemMoviesBinding;
 import com.qxy.mzbzy.ui.App;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -96,56 +93,6 @@ private FragmentMoviesrankInternetBinding binding;
         public List<Rank.Data.MList> getList() {
             return list;
         }
-        // 直接使用测试数据生成列表
-//        {
-//            Gson gson = new Gson();
-//
-//            Rank rank = gson.fromJson("{\n" +
-//                "  \"data\": {\n" +
-//                "    \"active_time\": \"2020-03-31 12:00:00\",\n" +
-//                "    \"description\": \"\",\n" +
-//                "    \"error_code\": \"0\",\n" +
-//                "    \"list\": [\n" +
-//                "      {\n" +
-//                "        \"actors\": [\n" +
-//                "          \"[徐峥 袁泉 沈腾 吴云芳 陈奇 黄梅莹 欧丽娅 贾冰 郭京飞]\"\n" +
-//                "        ],\n" +
-//                "        \"areas\": [\n" +
-//                "          \"[中国]\"\n" +
-//                "        ],\n" +
-//                "        \"directors\": [\n" +
-//                "          \"[徐峥]\"\n" +
-//                "        ],\n" +
-//                "        \"discussion_hot\": \"789200\",\n" +
-//                "        \"hot\": \"1.361e+06\",\n" +
-//                "        \"id\": \"6399487713065566465\",\n" +
-//                "        \"influence_hot\": \"789200\",\n" +
-//                "        \"maoyan_id\": \"1250696\",\n" +
-//                "        \"name\": \"囧妈\",\n" +
-//                "        \"name_en\": \"Lost in Russia\",\n" +
-//                "        \"poster\": \"https://p3-dy.bytecdn.cn/obj/compass/9ac412ae054b57f69c0967a8eb5e25c9\",\n" +
-//                "        \"release_date\": \"2020-01-25\",\n" +
-//                "        \"search_hot\": \"684900\",\n" +
-//                "        \"tags\": [\n" +
-//                "          \"[喜剧]\"\n" +
-//                "        ],\n" +
-//                "        \"topic_hot\": \"684900\",\n" +
-//                "        \"type\": \"1\"\n" +
-//                "      }\n" +
-//                "    ]\n" +
-//                "  },\n" +
-//                "  \"extra\": {\n" +
-//                "    \"description\": \"\",\n" +
-//                "    \"error_code\": \"0\",\n" +
-//                "    \"logid\": \"202008121419360101980821035705926A\",\n" +
-//                "    \"now\": \"1597213176393\",\n" +
-//                "    \"sub_description\": \"\",\n" +
-//                "    \"sub_error_code\": \"0\"\n" +
-//                "  }\n" +
-//                "}", Rank.class);
-//            list=rank.getData().getList();
-//            Log.d("json解析", "实例初始值设定项: "+list);
-//        }
         // 请求云端上mock接口
         {
             CacheDao cacheDao = CacheRepository.getInstance(getContext()).CacheDao();
@@ -154,13 +101,13 @@ private FragmentMoviesrankInternetBinding binding;
                 if (cache != null) {
                     list = cache.rank.getData().getList();
                 }
+                RankRepository repository = RankRepository.getInstance();
+                repository.getRankMovieI(data -> {
+                    Rank result = data.getResult();
+                    new Thread(() -> cacheDao.insert(new Cache("moviesrankI", result))).start();
+                    list = result.getData().getList();
+                });
             }).start();
-            RankRepository repository = RankRepository.getInstance();
-            repository.getRankMovieC(data -> {
-                Rank result = data.getResult();
-                new Thread(() -> cacheDao.insert(new Cache("moviesrankI", result))).start();
-                list = result.getData().getList();
-            });
         }
         @NonNull
         @Override

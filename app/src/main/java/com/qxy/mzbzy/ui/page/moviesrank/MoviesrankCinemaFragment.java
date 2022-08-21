@@ -146,13 +146,13 @@ public class MoviesrankCinemaFragment extends Fragment {
                 if (cache != null) {
                     list = cache.rank.getData().getList();
                 }
+                RankRepository repository = RankRepository.getInstance();
+                repository.getRankMovieC(data -> {
+                    Rank result = data.getResult();
+                    new Thread(() -> cacheDao.insert(new Cache("moviesrankC", result))).start();
+                    list = result.getData().getList();
+                });
             }).start();
-            RankRepository repository = RankRepository.getInstance();
-            repository.getRankMovieC(data -> {
-                Rank result = data.getResult();
-                new Thread(() -> cacheDao.insert(new Cache("moviesrankC", result))).start();
-                list = result.getData().getList();
-            });
         }
 
         @NonNull
