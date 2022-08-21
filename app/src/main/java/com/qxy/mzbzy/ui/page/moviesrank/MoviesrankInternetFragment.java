@@ -100,12 +100,14 @@ private FragmentMoviesrankInternetBinding binding;
                 Cache cache = cacheDao.getByName("moviesrankI");
                 if (cache != null) {
                     list = cache.rank.getData().getList();
+                    getActivity().runOnUiThread(()-> this.notifyDataSetChanged());
                 }
                 RankRepository repository = RankRepository.getInstance();
                 repository.getRankMovieI(data -> {
                     Rank result = data.getResult();
                     new Thread(() -> cacheDao.insert(new Cache("moviesrankI", result))).start();
                     list = result.getData().getList();
+                    getActivity().runOnUiThread(()-> this.notifyDataSetChanged());
                 });
             }).start();
         }

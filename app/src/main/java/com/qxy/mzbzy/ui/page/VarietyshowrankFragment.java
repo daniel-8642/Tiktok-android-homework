@@ -106,12 +106,14 @@ public class VarietyshowrankFragment extends Fragment {
                 Cache cache = cacheDao.getByName("Show");
                 if (cache != null) {
                     list = cache.rank.getData().getList();
+                    getActivity().runOnUiThread(()-> this.notifyDataSetChanged());
                 }
                 RankRepository repository = RankRepository.getInstance();
                 repository.getRankShow(data -> {
                     Rank result = data.getResult();
                     new Thread(() -> cacheDao.insert(new Cache("Show", result))).start();
                     list = result.getData().getList();
+                    getActivity().runOnUiThread(()-> this.notifyDataSetChanged());
                 });
             }).start();
         }

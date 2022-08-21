@@ -2,14 +2,13 @@ package com.qxy.mzbzy.ui;
 
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.qxy.mzbzy.R;
 import com.qxy.mzbzy.databinding.ActivityMainBinding;
 
@@ -35,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+//    @Override
+//    public void setContentView(View view) {
+//        super.setContentView(view);
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
+//    }
 }

@@ -77,12 +77,14 @@ public class TvseriesrankFragment extends Fragment {
                 Cache cache = cacheDao.getByName("TV");
                 if (cache != null) {
                     list = cache.rank.getData().getList();
+                    getActivity().runOnUiThread(()-> this.notifyDataSetChanged());
                 }
                 RankRepository repository = RankRepository.getInstance();
                 repository.getRankTV(data -> {
                     Rank result = data.getResult();
                     new Thread(() -> cacheDao.insert(new Cache("TV", result))).start();
                     list = result.getData().getList();
+                    getActivity().runOnUiThread(()-> this.notifyDataSetChanged());
                 });
             }).start();
         }
